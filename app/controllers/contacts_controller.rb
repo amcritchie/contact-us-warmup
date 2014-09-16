@@ -20,22 +20,19 @@ class ContactsController < ApplicationController
 
     if @contact.save
       redirect_to @contact, notice: 'Contact was successfully created.'
-      render :show, status: :created, location: @contact
+      # render :show, status: :created, location: @contact
     else
       render :new
     end
   end
 
   def destroy
-    if @contact.update(contact_params)
+    @contact.destroy
       redirect_to @contact, notice: 'Contact was successfully updated.'
-    else
-      render :edit
-    end
   end
 
   def update
-    @contact.destroy
+    # @contact.destroy
     redirect_to contacts_url, notice: 'Contact was successfully destroyed.'
   end
 
@@ -49,9 +46,9 @@ class ContactsController < ApplicationController
     end
 
     def contact_params
-      params[:contact][:email].reverse!
-      params[:contact][:name].reverse!
-      params[:contact][:notes].reverse!
+      params[:contact][:email]#.reverse!
+      params[:contact][:name]#.reverse!
+      params[:contact][:notes]#.reverse!
       params.require(:contact).permit(:name, :email, :notes)
     end
 end
